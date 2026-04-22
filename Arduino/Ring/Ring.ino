@@ -34,6 +34,7 @@ void loop() {
   }else{
     calm_ring();
   }
+  ring.show();
 
   count++;
   delay(10);
@@ -42,11 +43,11 @@ void loop() {
 void alarm_ring(){
   long count_div = (count/100)%10; //Change every second
 
-  ring.fill(ring.Color(255,255-count_div*25,255-count_div*25),0,12);
+  ring.fill(ring.Color(100,100-count_div*10,100-count_div*10),0,12);
 }
 
 void calm_ring(){
   long count_div = (count/10)%100; //Change every 100 ms
 
-  ring.fill(ring.Color(255-count_div*2.55f,255,255-count_div*2.55f),0,12);
+  ring.fill(ring.Color(100-count_div,100,100-count_div),0,12);
 }
