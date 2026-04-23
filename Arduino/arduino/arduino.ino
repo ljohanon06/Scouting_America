@@ -5,7 +5,7 @@
 #define LED_COUNT 12    //Number of leds on ring
 
 #define SERVO_PIN 7     //D4
-#define BUZZER_PIN D5    //Pin on arduino
+#define BUZZER_PIN A1    //Pin on arduino
 
 #define TRIGGER_PIN A5
 #define ECHO_PIN A6
