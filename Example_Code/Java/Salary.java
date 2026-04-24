@@ -3,7 +3,11 @@ import java.util.*;
 
 public class Salary{
     public static void main(String[] args) throws IOException{
-        BufferedReader reader = new BufferedReader(new FileReader("employees.txt"));
+        String path = Salary.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        File base_dir = new File(path).getParentFile().getParentFile().getParentFile();
+        File txt_file = new File(base_dir, "employees.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader(txt_file));
 
         ArrayList<Employee> employees = new ArrayList<>();
 
