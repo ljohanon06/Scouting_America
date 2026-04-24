@@ -54,6 +54,8 @@ void setup(){
     pinMode(ECHO_PIN,INPUT);
 
     pinMode(BUZZER_PIN, OUTPUT);
+
+    Serial.begin(9600);
 }
 
 void loop(){
@@ -107,7 +109,7 @@ void calm_tone(){
 void alarm_ring(){
   long count_div = (count/100)%10; //Change every second
 
-  ring.fill(ring.Color(100,100-count_div*10,100-count_div*10),0,12);
+  ring.fill(ring.Color(100,90-count_div*10,90-count_div*10),0,12);
 }
 
 void calm_ring(){
