@@ -45,7 +45,7 @@ void setup(){
     servo.setPeriodHertz(50);               //Servos run at 50 Hz
     servo.attach(SERVO_PIN, 500, 2400);    //The servo sends pulses for between 1000 and 2000 microseconds.
     servo.write(180);
-    
+
     pinMode(LED_PIN, OUTPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(BUTTON_PIN),button,FALLING);
@@ -57,34 +57,27 @@ void setup(){
 }
 
 void loop(){
-    if(count % 10 == 0 && !alarm_mode){
-        measure_ultrasonic();
-
-        if(distanceCm < 10 || distanceCm > 40){
-            alarm_mode = true;
-            alarm_time = count;
-        }
-    }
-    if(button_pressed || alarm_mode){
-        digitalWrite(LED_PIN, HIGH);
-        servo.write(0);
-        alarm_tone();
-        alarm_ring();
-
-        if(count - 3000 > alarm_time){
-            button_pressed = false;
-            alarm_mode = false;
-        }
+  if(count % 100 == 0){
+    measure_ultrasonic();
+    Serial.print("Distance: ");
+    Serial.print(distanceCm);
+    Serial.println(" cm");
+    if(distanceCm < 10 || distanceCm > 40){
+      digitalWrite(LED_PIN,HIGH);
     }else{
-        digitalWrite(LED_PIN, LOW);
-        servo.write(180);
-        calm_tone();
-        calm_ring();
+      digitalWrite(LED_PIN,LOW);
     }
-    ring.show();
+  }
+  alarm_ring();
+  alarm_tone();
+  ring.show();
 
-    count++;
-    delay(10);
+  if(button_pressed){
+    servo.write(0);
+  }
+
+  count++;
+  delay(10);
 }
 
 void alarm_tone(){
