@@ -1,5 +1,4 @@
 #include <Adafruit_NeoPixel.h>
-#include <ESP32Servo.h>
 
 #define BUTTON_PIN D4
 

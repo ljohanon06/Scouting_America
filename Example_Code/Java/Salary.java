@@ -44,7 +44,7 @@ public class Salary{
         
     }
 
-    public static Employee fromString(String emp){
+    static Employee fromString(String emp){
         String[] words = emp.split("\\|");
         if(words[1].trim().equals("Full")){
             int age = Integer.parseInt(words[4].trim());
