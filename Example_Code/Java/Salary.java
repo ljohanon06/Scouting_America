@@ -3,22 +3,23 @@ import java.util.*;
 
 public class Salary{
     public static void main(String[] args) throws IOException{
-        String path = Salary.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        //Code to find the text file in the parent directory
+        String path = Salary.class.getProtectionDomain().getCodeSource().getLocation().getPath(); 
         File base_dir = new File(path).getParentFile().getParentFile().getParentFile();
         File txt_file = new File(base_dir, "employees.txt");
 
         BufferedReader reader = new BufferedReader(new FileReader(txt_file));
 
+        //Create a list and add every Employee to it
         ArrayList<Employee> employees = new ArrayList<>();
 
         String line = reader.readLine();
-        
         while(line != null){
-            employees.add(fromString(line));
+            employees.add(fromString(line)); //fromString converts a string into an employee
             line = reader.readLine();
         }
 
-        //Combined
+        //Calculate the salary of every employee
         long sum = 0;
         int count = 0;
         for(Employee e : employees){
@@ -28,7 +29,7 @@ public class Salary{
 
         System.out.printf("Combined: %.2f\n", (double)sum/count);
 
-        //Part Full
+        //Calculate the salary for the full and part time employees seperately
         long partSum = 0;
         int partCount = 0;
         long fullSum = 0;
@@ -49,14 +50,14 @@ public class Salary{
     }
 
     static Employee fromString(String emp){
-        String[] words = emp.split("\\|");
-        if(words[1].trim().equals("Full")){
+        String[] words = emp.split("\\|"); //  '\\|' is used to refer to '|' as '|' also refers to OR in regex
+        if(words[1].trim().equals("Full")){ //Return a full time employee
             int age = Integer.parseInt(words[4].trim());
             int salary = Integer.parseInt(words[2].trim());
             boolean gender = words[3].trim().equals("Male");
 
             return new FullTime(words[0].trim(),gender,age,salary);
-        }else{
+        }else{//Return a part time employee
             int age = Integer.parseInt(words[4].trim());
             String salaryParts[] = words[2].trim().split("-");
             int hours = Integer.parseInt(salaryParts[0]);
