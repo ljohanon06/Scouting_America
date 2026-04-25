@@ -40,13 +40,19 @@ void loop() {
 }
 
 void alarm_ring(){
-  long count_div = (count/20)%10; //Change every second
+  long count_div = (count/50)%3; 
 
-  ring.fill(ring.Color(100,90-count_div*10,90-count_div*10),0,12);
+  switch(count_div){
+    case 0: ring.fill(ring.Color(100,0,0),0,4); break;
+    case 1: ring.fill(ring.Color(0,100,0),4,8); break;
+    case 2: ring.fill(ring.Color(0,0,100),8,12); break;
+  }
 }
 
 void calm_ring(){
-  long count_div = (count/10)%100; //Change every 100 ms
+  long count_div = (count/10)%100; 
 
-  ring.fill(ring.Color(90-count_div,100,90-count_div),0,12);
+  int r_b = 90-count_div;
+
+  ring.fill(ring.Color(r_b,100,r_b),0,12);
 }
