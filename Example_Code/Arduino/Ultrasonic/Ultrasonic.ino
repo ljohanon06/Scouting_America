@@ -26,7 +26,7 @@ void loop() {
     Serial.print("Distance: ");
     Serial.print(distanceCm);
     Serial.println(" cm");
-    if(distanceCm < 10 || distanceCm > 40){
+    if(distanceCm < 3 || distanceCm > 8){
       digitalWrite(LED_PIN,HIGH);
     }else{
       digitalWrite(LED_PIN,LOW);
